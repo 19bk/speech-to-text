@@ -70,36 +70,10 @@ class _SpeechHomePageState extends State<SpeechHomePage> {
         setState(() {
           _sentiment = analysis['sentiment'];
           _containsVulgar = analysis['containsVulgar'];
+          _text = '$text\n\nSentiment: $_sentiment${_containsVulgar ? ' (Contains vulgar language)' : ''}';
         });
-      }
-
-      final response = await http.post(
-        Uri.parse('https://api.openai.com/v1/chat/completions'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer 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',
-        },
-        body: jsonEncode({
-          'model': 'gpt-3.5-turbo',
-          'messages': [
-            {
-              'role': 'user',
-              'content': text,
-            }
-          ],
-          'temperature': 0.7,
-        }),
-      );
-
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        setState(() {
-          _response = data['choices'][0]['message']['content'];
-          _text = '$text\n\nSentiment: $_sentiment${_containsVulgar ? ' (Contains vulgar language)' : ''}\n\nResponse: $_response';
-        });
-        await _speak();
       } else {
-        print('Failed to get response: ${response.statusCode}');
+        print('Failed to get response: ${analysisResponse.statusCode}');
       }
     } catch (e) {
       print('Error: $e');
@@ -172,7 +146,7 @@ class _SpeechHomePageState extends State<SpeechHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('AI Voice Assistant'),
+        title: Text('Demo'),
       ),
       body: Column(
         children: [
