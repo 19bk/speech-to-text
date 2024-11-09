@@ -3,6 +3,7 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'wave_animation.dart';
 
 void main() => runApp(SpeechToTextApp());
 
@@ -11,8 +12,9 @@ class SpeechToTextApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Speech to Text App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: Color(0xFF0A1A2F),
+        primaryColor: Colors.blue,
       ),
       home: SpeechHomePage(),
     );
@@ -119,107 +121,101 @@ class _SpeechHomePageState extends State<SpeechHomePage> {
   Color _getSentimentColor() {
     switch (_sentiment.toLowerCase()) {
       case 'positive':
-        return Colors.green.shade100;
+        return Colors.green;
       case 'negative':
-        return Colors.red.shade100;
+        return Colors.red;
       case 'neutral':
-        return Colors.blue.shade100;
+        return Colors.blue;
       default:
-        return Colors.grey.shade200;
+        return Colors.grey;
     }
   }
 
   Color _getSentimentTextColor() {
-    switch (_sentiment.toLowerCase()) {
-      case 'positive':
-        return Colors.green.shade900;
-      case 'negative':
-        return Colors.red.shade900;
-      case 'neutral':
-        return Colors.blue.shade900;
-      default:
-        return Colors.grey.shade700;
-    }
+    return Colors.white;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Demo'),
-      ),
-      body: Column(
+      body: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                color: _isListening ? Colors.green.shade100 : 
-                      _isLoading ? Colors.orange.shade100 : 
-                      _sentiment.isNotEmpty ? _getSentimentColor() : Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    _isListening ? 'Listening...' : 
-                    _isLoading ? 'Getting Response...' : 
-                    _sentiment.isNotEmpty ? '${_sentiment[0].toUpperCase()}${_sentiment.substring(1)}${_containsVulgar ? ' (Vulgar)' : ''}' : 
-                    'Not Listening',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: _isListening ? Colors.green.shade900 : 
-                            _isLoading ? Colors.orange.shade900 : 
-                            _sentiment.isNotEmpty ? _getSentimentTextColor() : Colors.grey.shade700,
-                    ),
-                  ),
-                  if (!_isLoading) Text(
-                    'Confidence: ${(_confidence * 100).toStringAsFixed(1)}%',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey.shade700,
-                    ),
-                  ),
-                ],
+          // Background gradient
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Color(0xFF0A1A2F), Color(0xFF0D2644)],
               ),
             ),
           ),
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.only(bottom: 150),
-              child: SingleChildScrollView(
-                reverse: true,
-                child: Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: Text(
-                    _text,
-                    style: TextStyle(
-                      fontSize: 32,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w400,
+          
+          // Main content
+          SafeArea(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Text(
+                        _isListening ? 'Listening...' : _text,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w300,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                 ),
-              ),
+                
+                // Status container
+                if (_sentiment.isNotEmpty)
+                  Container(
+                    margin: EdgeInsets.all(20),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    decoration: BoxDecoration(
+                      color: _getSentimentColor().withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Text(
+                      '${_sentiment[0].toUpperCase()}${_sentiment.substring(1)}${_containsVulgar ? ' (Vulgar)' : ''}',
+                      style: TextStyle(
+                        color: _getSentimentTextColor(),
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                
+                // Microphone button
+                Container(
+                  margin: EdgeInsets.only(bottom: 50),
+                  child: WaveAnimation(
+                    isAnimating: _isListening,
+                    color: Colors.blue,
+                    child: GestureDetector(
+                      onTap: _listen,
+                      child: Container(
+                        height: 80,
+                        width: 80,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: _isListening ? Colors.blue.withOpacity(0.2) : Colors.blue.withOpacity(0.1),
+                        ),
+                        child: Icon(
+                          _isListening ? Icons.mic : Icons.mic_none,
+                          color: Colors.white,
+                          size: 40,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          FloatingActionButton(
-            onPressed: _listen,
-            child: Icon(_isListening ? Icons.mic : Icons.mic_none),
-            backgroundColor: _isListening ? Colors.green : Colors.blue,
-          ),
-          SizedBox(width: 20),
-          FloatingActionButton(
-            onPressed: _speak,
-            child: Icon(Icons.play_arrow),
           ),
         ],
       ),

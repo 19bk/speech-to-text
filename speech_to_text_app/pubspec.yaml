@@ -34,6 +34,7 @@ dependencies:
   speech_to_text: ^6.6.0
   flutter_tts: ^3.8.5
   http: ^1.2.0
+  wave: ^0.2.2
 
 dev_dependencies:
   flutter_test:
