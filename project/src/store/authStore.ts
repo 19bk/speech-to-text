@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 interface User {
   name: string;
@@ -14,15 +15,22 @@ interface AuthState {
 
 const DEFAULT_AVATAR = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80";
 
-export const useAuthStore = create<AuthState>((set) => ({
-  user: {
-    name: 'John Doe',
-    email: 'john@example.com',
-    avatar: DEFAULT_AVATAR,
-  },
-  updateAvatar: (avatar) => 
-    set((state) => ({
-      user: state.user ? { ...state.user, avatar } : null,
-    })),
-  logout: () => set({ user: null }),
-}));
+export const useAuthStore = create(
+  persist<AuthState>(
+    (set) => ({
+      user: {
+        name: 'John Doe',
+        email: 'john@example.com',
+        avatar: DEFAULT_AVATAR,
+      },
+      updateAvatar: (avatar) => 
+        set((state) => ({
+          user: state.user ? { ...state.user, avatar } : null,
+        })),
+      logout: () => set({ user: null }),
+    }),
+    {
+      name: 'auth-storage',
+    }
+  )
+);

@@ -18,7 +18,9 @@ export default function Header() {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        updateAvatar(reader.result as string);
+        const base64String = reader.result as string;
+        updateAvatar(base64String);
+        setShowProfile(false);
       };
       reader.readAsDataURL(file);
     }
