@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
-import { Bell, Search, LogOut, Upload, User } from 'lucide-react';
+import { Bell, Search, LogOut, Upload } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
+
+const DEFAULT_AVATAR = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80";
 
 export default function Header() {
   const { user, logout, updateAvatar } = useAuthStore();
@@ -48,7 +50,7 @@ export default function Header() {
                 className="h-8 w-8 rounded-full overflow-hidden focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <img
-                  src={user?.avatar || "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"}
+                  src={user?.avatar || DEFAULT_AVATAR}
                   alt="Profile"
                   className="h-full w-full object-cover"
                 />
