@@ -1,4 +1,3 @@
-```markdown:project/README.md
 # Device Monitoring & Harassment Detection Dashboard
 
 ## Overview
@@ -9,50 +8,50 @@ A modern React-based dashboard for monitoring IoT devices and analyzing harassme
 - Alert management system with priority levels and notifications
 - Harassment incident analytics and reporting
 - Class risk analysis and trend tracking
-- Responsive design with mobile-first approach
+- Responsive design with a mobile-first approach
 
 ## Tech Stack
-- React 18.3
-- TypeScript 5.5
-- Vite 5.4
-- Tailwind CSS 3.4
-- Zustand 4.5 (State Management)
-- Lucide React (Icons)
+- **React** 18.3
+- **TypeScript** 5.5
+- **Vite** 5.4
+- **Tailwind CSS** 3.4
+- **Zustand** 4.5 (State Management)
+- **Lucide React** (Icons)
 
 ## Quick Start
 
-1. Install dependencies:
-```bash
-npm install
-```
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-2. Start development server:
-```bash
-npm run dev
-```
+2. **Start development server:**
+   ```bash
+   npm run dev
+   ```
 
-3. Build for production:
-```bash
-npm run build
-```
+3. **Build for production:**
+   ```bash
+   npm run build
+   ```
 
-4. Preview production build:
-```bash
-npm run preview
-```
+4. **Preview production build:**
+   ```bash
+   npm run preview
+   ```
 
 ## Project Structure
 
 ```
 src/
 ├── components/
-│   ├── AlertsPanel.tsx     # Real-time alert monitoring
-│   ├── DeviceGrid.tsx      # IoT device status grid
+│   ├── AlertsPanel.tsx         # Real-time alert monitoring
+│   ├── DeviceGrid.tsx          # IoT device status grid
 │   ├── HarassmentDashboard.tsx  # Analytics dashboard
-│   ├── Header.tsx          # App header with navigation
-│   └── Sidebar.tsx         # Navigation sidebar
-├── App.tsx                 # Main app component
-└── main.tsx               # App entry point
+│   ├── Header.tsx              # App header with navigation
+│   └── Sidebar.tsx             # Navigation sidebar
+├── App.tsx                     # Main app component
+└── main.tsx                    # App entry point
 ```
 
 ## Key Components
@@ -81,20 +80,20 @@ This project includes Netlify configuration for easy deployment:
 
 1. Push to GitHub
 2. Connect to Netlify
-3. Deploy with included netlify.toml configuration
+3. Deploy with included `netlify.toml` configuration
 
-Manual deployment via Netlify CLI:
-```bash
-netlify deploy
-```
+**Manual deployment via Netlify CLI:**
+   ```bash
+   netlify deploy
+   ```
 
 ## Development
 
 ### Code Style
-- ESLint for code quality
-- TypeScript for type safety
-- Tailwind CSS for styling
-- Vite for fast development
+- **ESLint** for code quality
+- **TypeScript** for type safety
+- **Tailwind CSS** for styling
+- **Vite** for fast development
 
 ### State Management
 Uses Zustand for global state management, particularly for:
@@ -114,4 +113,3 @@ Uses Zustand for global state management, particularly for:
 ## License
 
 MIT License - feel free to use this project for your own purposes.
-```
