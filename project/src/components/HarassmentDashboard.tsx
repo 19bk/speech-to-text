@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AlertTriangle, BarChart3, Clock, MapPin, Shield, Users, BookOpen } from 'lucide-react';
+import IncidentTrends from './IncidentTrends';
 
 export default function HarassmentDashboard() {
   const [timeRange, setTimeRange] = useState('7');
@@ -123,36 +124,6 @@ function ClassAnalytics() {
             </div>
           </div>
         ))}
-      </div>
-    </div>
-  );
-}
-
-interface IncidentTrendsProps {
-  timeRange: string;
-  setTimeRange: (range: string) => void;
-}
-
-function IncidentTrends({ timeRange, setTimeRange }: IncidentTrendsProps) {
-  return (
-    <div className="bg-white rounded-xl shadow-sm p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold">Incident Trends</h3>
-        <select 
-          value={timeRange}
-          onChange={(e) => setTimeRange(e.target.value)}
-          className="text-sm border-gray-300 rounded-md"
-        >
-          <option value="7">Last 7 days</option>
-          <option value="30">Last 30 days</option>
-          <option value="90">Last 3 months</option>
-        </select>
-      </div>
-      <div className="h-64 flex items-center justify-center border-2 border-dashed border-gray-200 rounded-lg">
-        <div className="text-center">
-          <BarChart3 className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-          <p className="text-sm text-gray-500">Chart visualization would go here</p>
-        </div>
       </div>
     </div>
   );
