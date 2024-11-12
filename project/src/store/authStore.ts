@@ -12,7 +12,7 @@ interface AuthState {
   logout: () => void;
 }
 
-const DEFAULT_AVATAR = "https://unsplash.com/photos/smiling-woman-wearing-turban-i2hoD-C2RUA?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash";
+const DEFAULT_AVATAR = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80";
 
 export const useAuthStore = create<AuthState>((set) => ({
   user: {

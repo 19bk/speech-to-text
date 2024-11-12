@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Bell, Search, LogOut, Upload } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
 
-const DEFAULT_AVATAR = "https://unsplash.com/photos/smiling-woman-wearing-turban-i2hoD-C2RUA?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash";
+const DEFAULT_AVATAR = 'https://via.placeholder.com/150';
 
 export default function Header() {
   const { user, logout, updateAvatar } = useAuthStore();
