@@ -16,7 +16,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   user: {
     name: 'John Doe',
     email: 'john@example.com',
-    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    avatar: 'https://unsplash.com/photos/woman-sits-of-sofa-while-using-tablet-computer-eZ8g_7Sh0J0?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash',
   },
   updateAvatar: (avatar) => 
     set((state) => ({
