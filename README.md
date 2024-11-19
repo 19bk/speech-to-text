@@ -1,7 +1,7 @@
 # Device Monitoring & Harassment Detection Dashboard
 
 ## Overview
-A modern React-based dashboard for monitoring IoT devices and analyzing harassment incidents in educational environments. Built with Vite, TypeScript, and Tailwind CSS.
+A modern React-based dashboard for monitoring IoT devices and analyzing harassment incidents in educational environments. Built with Vite, TypeScript, and Tailwind CSS. https://speakkind.netlify.app/
 
 ## Features
 - Real-time device status monitoring with battery and signal strength tracking
